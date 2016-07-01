@@ -5661,6 +5661,9 @@
 					this.link.cleanUrl();
 
 					if (this.link.target == '_blank') $('#redactor-link-blank').prop('checked', true);
+					if (this.link.author) $('#redactor-link-radio-author').prop('checked', true);
+					if (this.link.company) $('#redactor-link-radio-company').prop('checked', true);
+					if (this.link.legend) $('#redactor-link-radio-legend').prop('checked', true);
 
 					this.link.$inputUrl = $('#redactor-link-url');
 					this.link.$inputText = $('#redactor-link-url-text');
@@ -5708,6 +5711,9 @@
 						this.link.url = $el.attr('href');
 						this.link.text = $el.text();
 						this.link.target = $el.attr('target');
+						this.link.author = $el.hasClass('redactor-link-radio-author');
+						this.link.company = $el.hasClass('redactor-link-radio-company');
+						this.link.legend = $el.hasClass('redactor-link-radio-legend');
 					}
 					else
 					{
@@ -5722,6 +5728,9 @@
 					this.placeholder.remove();
 
 					var target = '';
+					var author = false;
+					var company = false;
+					var legend = false;
 					var link = this.link.$inputUrl.val();
 					var text = this.link.$inputText.val();
 
@@ -5749,6 +5758,18 @@
 						{
 							target = '_blank';
 						}
+						if ($('#redactor-link-radio-author').prop('checked'))
+						{
+							author = true;
+						}
+						if ($('#redactor-link-radio-company').prop('checked'))
+						{
+							company = true;
+						}
+						if ($('#redactor-link-radio-legend').prop('checked'))
+						{
+							legend = true;
+						}
 
 						// test url (add protocol)
 						var pattern = '((xn--)?[a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}';
@@ -5761,10 +5782,10 @@
 						}
 					}
 
-					this.link.set(text, link, target);
+					this.link.set(text, link, target, author, company, legend);
 					this.modal.close();
 				},
-				set: function(text, link, target)
+				set: function(text, link, target, author, company, legend)
 				{
 					text = $.trim(text.replace(/<|>/g, ''));
 
@@ -5805,6 +5826,18 @@
 						{
 							$link.removeAttr('target');
 						}
+						if (author)
+						{
+							$link.removeClass('transcript-company transcript-legend').addClass('transcript-author');
+						}
+						if (company)
+						{
+							$link.removeClass('transcript-author transcript-legend').addClass('transcript-company');
+						}
+						if (legend)
+						{
+							$link.removeClass('transcript-author transcript-company').addClass('transcript-legend');
+						}
 
 						this.selection.selectElement($link);
 
@@ -5816,6 +5849,9 @@
 						{
 							var $a = $('<a />').attr('href', link).text(text);
 							if (target !== '') $a.attr('target', target);
+							if (author) $a.removeClass('transcript-company transcript-legend').addClass('transcript-author');
+							if (company) $a.removeClass('transcript-author transcript-legend').addClass('transcript-company');
+							if (legend) $a.removeClass('transcript-author transcript-company').addClass('transcript-legend');
 
 							this.insert.node($a);
 							this.selection.selectElement($a);
@@ -5827,6 +5863,9 @@
 							{
 								$a = $('<a href="' + link + '">').text(text);
 								if (target !== '') $a.attr('target', target);
+								if (author) $a.removeClass('transcript-company transcript-legend').addClass('transcript-author');
+								if (company) $a.removeClass('transcript-author transcript-legend').addClass('transcript-company');
+								if (legend) $a.removeClass('transcript-author transcript-company').addClass('transcript-legend');
 
 								$a = $(this.insert.node($a));
 
@@ -5848,6 +5887,9 @@
 								}
 
 								if (target !== '') $a.attr('target', target);
+								if (author) $a.removeClass('transcript-company transcript-legend').addClass('transcript-author');
+								if (company) $a.removeClass('transcript-author transcript-legend').addClass('transcript-company');
+								if (legend) $a.removeClass('transcript-author transcript-company').addClass('transcript-legend');
 								$a.removeAttr('style').removeAttr('_moz_dirty');
 
 								if (this.selection.getText().match(/\s$/))
@@ -6142,6 +6184,9 @@
 						+ '<label>' + this.lang.get('text') + '</label>'
 						+ '<input type="text" id="redactor-link-url-text" />'
 						+ '<label><input type="checkbox" id="redactor-link-blank"> ' + this.lang.get('link_new_tab') + '</label>'
+						+ '<label><input type="radio" id="redactor-link-radio-author">author bio</label>'
+						+ '<label><input type="radio" id="redactor-link-radio-company">company desc</label>'
+						+ '<label><input type="radio" id="redactor-link-radio-legend">legend</label>'
 						+ '</section>'
 					};
 
