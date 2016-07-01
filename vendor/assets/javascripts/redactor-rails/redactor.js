@@ -5712,8 +5712,8 @@
 						this.link.text = $el.text();
 						this.link.target = $el.attr('target');
 						this.link.author = $el.hasClass('transcript-author');
-						this.link.company = $el.hasClass('transcript-author');
-						this.link.legend = $el.hasClass('transcript-author');
+						this.link.company = $el.hasClass('transcript-company');
+						this.link.legend = $el.hasClass('transcript-legend');
 					}
 					else
 					{
