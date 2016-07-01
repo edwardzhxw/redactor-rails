@@ -5739,6 +5739,18 @@
 						this.link.text = this.sel.toString();
 						this.link.url = '';
 						this.link.target = '';
+						this.link.author = false;
+						this.link.company = false;
+						this.link.speaker = false;
+						this.link.fda = false;
+						this.link.institutions = false;
+						this.link.stock = false;
+						this.link.corporate = false;
+						this.link.nih = false;
+						this.link.product = false;
+						this.link.device = false;
+						this.link.information = false;
+						this.link.resource = false;
 					}
 
 				},
