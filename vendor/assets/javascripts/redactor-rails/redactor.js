@@ -6184,9 +6184,9 @@
 						+ '<label>' + this.lang.get('text') + '</label>'
 						+ '<input type="text" id="redactor-link-url-text" />'
 						+ '<label><input type="checkbox" id="redactor-link-blank"> ' + this.lang.get('link_new_tab') + '</label>'
-						+ '<label><input type="radio" id="redactor-link-radio-author">&nbsp;author bio</label>'
-						+ '<label><input type="radio" id="redactor-link-radio-company">&nbsp;company desc</label>'
-						+ '<label><input type="radio" id="redactor-link-radio-legend">&nbsp;legend</label>'
+						+ '<label><input type="radio" id="redactor-link-radio-author" name="transcript" value="author">&nbsp;author bio</label>'
+						+ '<label><input type="radio" id="redactor-link-radio-company" name="transcript" value="company">&nbsp;company desc</label>'
+						+ '<label><input type="radio" id="redactor-link-radio-legend" name="transcript" value="legend">&nbsp;legend</label>'
 						+ '</section>'
 					};
 
