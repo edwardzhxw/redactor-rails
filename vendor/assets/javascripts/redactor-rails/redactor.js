@@ -5711,9 +5711,9 @@
 						this.link.url = $el.attr('href');
 						this.link.text = $el.text();
 						this.link.target = $el.attr('target');
-						this.link.author = $el.hasClass('redactor-link-radio-author');
-						this.link.company = $el.hasClass('redactor-link-radio-company');
-						this.link.legend = $el.hasClass('redactor-link-radio-legend');
+						this.link.author = $el.hasClass('transcript-author');
+						this.link.company = $el.hasClass('transcript-author');
+						this.link.legend = $el.hasClass('transcript-author');
 					}
 					else
 					{
