@@ -5663,7 +5663,16 @@
 					if (this.link.target == '_blank') $('#redactor-link-blank').prop('checked', true);
 					if (this.link.author) $('#redactor-link-radio-author').prop('checked', true);
 					if (this.link.company) $('#redactor-link-radio-company').prop('checked', true);
-					if (this.link.legend) $('#redactor-link-radio-legend').prop('checked', true);
+					if (this.link.speaker) $('#redactor-link-radio-speaker').prop('checked', true);
+					if (this.link.fda) $('#redactor-link-radio-fda').prop('checked', true);
+					if (this.link.institutions) $('#redactor-link-radio-institutions').prop('checked', true);
+					if (this.link.stock) $('#redactor-link-radio-stock').prop('checked', true);
+					if (this.link.corporate) $('#redactor-link-radio-corporate').prop('checked', true);
+					if (this.link.nih) $('#redactor-link-radio-nih').prop('checked', true);
+					if (this.link.product) $('#redactor-link-radio-product').prop('checked', true);
+					if (this.link.device) $('#redactor-link-radio-device').prop('checked', true);
+					if (this.link.information) $('#redactor-link-radio-information').prop('checked', true);
+					if (this.link.resource) $('#redactor-link-radio-resource').prop('checked', true);
 
 					this.link.$inputUrl = $('#redactor-link-url');
 					this.link.$inputText = $('#redactor-link-url-text');
@@ -5713,7 +5722,17 @@
 						this.link.target = $el.attr('target');
 						this.link.author = $el.hasClass('transcript-author');
 						this.link.company = $el.hasClass('transcript-company');
-						this.link.legend = $el.hasClass('transcript-legend');
+						this.link.speaker = $el.hasClass('transcript-speaker');
+						this.link.fda = $el.hasClass('transcript-fda');
+						this.link.institutions = $el.hasClass('transcript-institutions');
+						this.link.stock = $el.hasClass('transcript-stock');
+						this.link.corporate = $el.hasClass('transcript-corporate');
+						this.link.nih = $el.hasClass('transcript-nih');
+						this.link.product = $el.hasClass('transcript-product');
+						this.link.device = $el.hasClass('transcript-device');
+						this.link.information = $el.hasClass('transcript-information');
+						this.link.resource = $el.hasClass('transcript-resource');
+
 					}
 					else
 					{
@@ -5728,9 +5747,7 @@
 					this.placeholder.remove();
 
 					var target = '';
-					var author = false;
-					var company = false;
-					var legend = false;
+					var radio = '';
 					var link = this.link.$inputUrl.val();
 					var text = this.link.$inputText.val();
 
@@ -5760,15 +5777,51 @@
 						}
 						if ($('#redactor-link-radio-author').prop('checked'))
 						{
-							author = true;
+							radio = 'author';
 						}
 						if ($('#redactor-link-radio-company').prop('checked'))
 						{
-							company = true;
+							radio = 'company';
 						}
-						if ($('#redactor-link-radio-legend').prop('checked'))
+						if ($('#redactor-link-radio-speaker').prop('checked'))
 						{
-							legend = true;
+							radio = 'speaker';
+						}
+						if ($('#redactor-link-radio-fda').prop('checked'))
+						{
+							radio = 'fda';
+						}
+						if ($('#redactor-link-radio-institutions').prop('checked'))
+						{
+							radio = 'institutions';
+						}
+						if ($('#redactor-link-radio-stock').prop('checked'))
+						{
+							radio = 'stock';
+						}
+						if ($('#redactor-link-radio-corporate').prop('checked'))
+						{
+							radio = 'corporate';
+						}
+						if ($('#redactor-link-radio-nih').prop('checked'))
+						{
+							radio = 'nih';
+						}
+						if ($('#redactor-link-radio-product').prop('checked'))
+						{
+							radio = 'product';
+						}
+						if ($('#redactor-link-radio-device').prop('checked'))
+						{
+							radio = 'device';
+						}
+						if ($('#redactor-link-radio-information').prop('checked'))
+						{
+							radio = 'information';
+						}
+						if ($('#redactor-link-radio-resource').prop('checked'))
+						{
+							radio = 'resource';
 						}
 
 						// test url (add protocol)
@@ -5782,10 +5835,10 @@
 						}
 					}
 
-					this.link.set(text, link, target, author, company, legend);
+					this.link.set(text, link, target, radio);
 					this.modal.close();
 				},
-				set: function(text, link, target, author, company, legend)
+				set: function(text, link, target, radio)
 				{
 					text = $.trim(text.replace(/<|>/g, ''));
 
@@ -5826,17 +5879,53 @@
 						{
 							$link.removeAttr('target');
 						}
-						if (author)
+						if (radio == 'author')
 						{
-							$link.removeClass('transcript-company transcript-legend').addClass('transcript-author');
+							$link.removeClass().addClass('transcript-author');
 						}
-						if (company)
+						else if (radio == 'company')
 						{
-							$link.removeClass('transcript-author transcript-legend').addClass('transcript-company');
+							$link.removeClass().addClass('transcript-company');
 						}
-						if (legend)
+						else if (radio == 'speaker')
 						{
-							$link.removeClass('transcript-author transcript-company').addClass('transcript-legend');
+							$link.removeClass().addClass('transcript-speaker');
+						}
+						else if (radio == 'fda')
+						{
+							$link.removeClass().addClass('transcript-fda');
+						}
+						else if (radio == 'institutions')
+						{
+							$link.removeClass().addClass('transcript-institutions');
+						}
+						else if (radio == 'stock')
+						{
+							$link.removeClass().addClass('transcript-stock');
+						}
+						else if (radio == 'corporate')
+						{
+							$link.removeClass().addClass('transcript-corporate');
+						}
+						else if (radio == 'nih')
+						{
+							$link.removeClass().addClass('transcript-nih');
+						}
+						else if (radio == 'product')
+						{
+							$link.removeClass().addClass('transcript-product');
+						}
+						else if (radio == 'device')
+						{
+							$link.removeClass().addClass('transcript-device');
+						}
+						else if (radio == 'information')
+						{
+							$link.removeClass().addClass('transcript-information');
+						}
+						else if (radio == 'resource')
+						{
+							$link.removeClass().addClass('transcript-resource');
 						}
 
 						this.selection.selectElement($link);
@@ -5849,9 +5938,18 @@
 						{
 							var $a = $('<a />').attr('href', link).text(text);
 							if (target !== '') $a.attr('target', target);
-							if (author) $a.removeClass('transcript-company transcript-legend').addClass('transcript-author');
-							if (company) $a.removeClass('transcript-author transcript-legend').addClass('transcript-company');
-							if (legend) $a.removeClass('transcript-author transcript-company').addClass('transcript-legend');
+							if (radio == 'author') $a.removeClass().addClass('transcript-author');
+							else if (radio == 'company') $a.removeClass().addClass('transcript-company');
+							else if (radio == 'speaker') $a.removeClass().addClass('transcript-speaker');
+							else if (radio == 'fda') $a.removeClass().addClass('transcript-fda');
+							else if (radio == 'institutions') $a.removeClass().addClass('transcript-institutions');
+							else if (radio == 'stock') $a.removeClass().addClass('transcript-stock');
+							else if (radio == 'corporate') $a.removeClass().addClass('transcript-corporate');
+							else if (radio == 'nih') $a.removeClass().addClass('transcript-nih');
+							else if (radio == 'product') $a.removeClass().addClass('transcript-product');
+							else if (radio == 'device') $a.removeClass().addClass('transcript-device');
+							else if (radio == 'information') $a.removeClass().addClass('transcript-information');
+							else if (radio == 'resource') $a.removeClass().addClass('transcript-resource');
 
 							this.insert.node($a);
 							this.selection.selectElement($a);
@@ -5863,9 +5961,18 @@
 							{
 								$a = $('<a href="' + link + '">').text(text);
 								if (target !== '') $a.attr('target', target);
-								if (author) $a.removeClass('transcript-company transcript-legend').addClass('transcript-author');
-								if (company) $a.removeClass('transcript-author transcript-legend').addClass('transcript-company');
-								if (legend) $a.removeClass('transcript-author transcript-company').addClass('transcript-legend');
+								if (radio == 'author') $a.removeClass().addClass('transcript-author');
+								else if (radio == 'company') $a.removeClass().addClass('transcript-company');
+								else if (radio == 'speaker') $a.removeClass().addClass('transcript-speaker');
+								else if (radio == 'fda') $a.removeClass().addClass('transcript-fda');
+								else if (radio == 'institutions') $a.removeClass().addClass('transcript-institutions');
+								else if (radio == 'stock') $a.removeClass().addClass('transcript-stock');
+								else if (radio == 'corporate') $a.removeClass().addClass('transcript-corporate');
+								else if (radio == 'nih') $a.removeClass().addClass('transcript-nih');
+								else if (radio == 'product') $a.removeClass().addClass('transcript-product');
+								else if (radio == 'device') $a.removeClass().addClass('transcript-device');
+								else if (radio == 'information') $a.removeClass().addClass('transcript-information');
+								else if (radio == 'resource') $a.removeClass().addClass('transcript-resource');
 
 								$a = $(this.insert.node($a));
 
@@ -5887,9 +5994,18 @@
 								}
 
 								if (target !== '') $a.attr('target', target);
-								if (author) $a.removeClass('transcript-company transcript-legend').addClass('transcript-author');
-								if (company) $a.removeClass('transcript-author transcript-legend').addClass('transcript-company');
-								if (legend) $a.removeClass('transcript-author transcript-company').addClass('transcript-legend');
+								if (radio == 'author') $a.removeClass().addClass('transcript-author');
+								else if (radio == 'company') $a.removeClass().addClass('transcript-company');
+								else if (radio == 'speaker') $a.removeClass().addClass('transcript-speaker');
+								else if (radio == 'fda') $a.removeClass().addClass('transcript-fda');
+								else if (radio == 'institutions') $a.removeClass().addClass('transcript-institutions');
+								else if (radio == 'stock') $a.removeClass().addClass('transcript-stock');
+								else if (radio == 'corporate') $a.removeClass().addClass('transcript-corporate');
+								else if (radio == 'nih') $a.removeClass().addClass('transcript-nih');
+								else if (radio == 'product') $a.removeClass().addClass('transcript-product');
+								else if (radio == 'device') $a.removeClass().addClass('transcript-device');
+								else if (radio == 'information') $a.removeClass().addClass('transcript-information');
+								else if (radio == 'resource') $a.removeClass().addClass('transcript-resource');
 								$a.removeAttr('style').removeAttr('_moz_dirty');
 
 								if (this.selection.getText().match(/\s$/))
@@ -6184,9 +6300,18 @@
 						+ '<label>' + this.lang.get('text') + '</label>'
 						+ '<input type="text" id="redactor-link-url-text" />'
 						+ '<label><input type="checkbox" id="redactor-link-blank"> ' + this.lang.get('link_new_tab') + '</label>'
-						+ '<label><input type="radio" id="redactor-link-radio-author" name="transcript" value="author">&nbsp;author bio</label>'
-						+ '<label><input type="radio" id="redactor-link-radio-company" name="transcript" value="company">&nbsp;company desc</label>'
-						+ '<label><input type="radio" id="redactor-link-radio-legend" name="transcript" value="legend">&nbsp;legend</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-author" name="transcript" value="author">&nbsp;author bio</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-company" name="transcript" value="company">&nbsp;company desc</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-speaker" name="transcript" value="speaker">&nbsp;Speaker’s biography</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-fda" name="transcript" value="fda">&nbsp;FDA product information resource</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-institutions" name="transcript" value="institutions">&nbsp;Government & academic institutions</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-stock" name="transcript" value="stock">&nbsp;Multinational company stock price data</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-corporate" name="transcript" value="corporate">&nbsp;Offical corporate website</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-nih" name="transcript" value="nih">&nbsp;Generic drug information (NIH)</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-product" name="transcript" value="product">&nbsp;Corporate pharma product resource</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-device" name="transcript" value="device">&nbsp;Corporate medical device resource</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-information" name="transcript" value="information">&nbsp;Third-party information resource</label>'
+						+ '<label><input type="radio" class="redactor-modal-link-radio" id="redactor-link-radio-resource" name="transcript" value="resource">&nbsp;Media resource</label>'
 						+ '</section>'
 					};
 

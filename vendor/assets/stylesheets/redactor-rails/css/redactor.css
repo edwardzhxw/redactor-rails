@@ -581,6 +581,10 @@ body .redactor-box-fullscreen {
   margin: 15px 0 3px 0 !important;
   padding: 0;
 }
+#redactor-modal .redactor-modal-link-radio {
+  display: inline-block;
+  width: 50%;
+}
 #redactor-modal input[type="radio"],
 #redactor-modal input[type="checkbox"] {
   position: relative;
